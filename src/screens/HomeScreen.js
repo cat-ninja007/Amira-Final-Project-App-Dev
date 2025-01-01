@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, FlatList} from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native'
 import React from 'react'
 import { bookCategory } from '../../Data/BookCategory'
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
+    const {navigation} = props
   return (
     <View style={styles.mainContainer}>
       <View style={styles.subtitleBox}>
@@ -15,16 +16,17 @@ const HomeScreen = () => {
             Each Card Contains Different Genre
         </Text>
       </View>
-
       <FlatList 
         data={bookCategory}
         contentContainerStyle={styles.flatlistContainer}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => {
             return (
-                <View style={styles.cardContainer}>
-                    <Text style={styles.card}>{item.category}</Text>
-                </View>
+                <TouchableOpacity onPress={() => navigation.navigate('BookList')}> //pass chosen genre
+                    <View style={styles.cardContainer}>
+                        <Text style={styles.card}>{item.category}</Text>
+                    </View>
+                </TouchableOpacity>
             )
         }}
         numColumns={2}
@@ -39,7 +41,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'lightblue'
+        backgroundColor: 'skyblue'
     },
     subtitleBox: {
         padding: 5,
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     cardContainer : {
-        backgroundColor: 'red',
+        backgroundColor: 'green',
         margin: 15,
         width: 170,
         height: 200,

@@ -73,13 +73,7 @@ const MainNavigator = () => {
                 <Stack.Screen
                 name="BookList"
                 component={BookListScreen}
-                options={{
-                    headerTitleAlign: 'center',
-                    headerTintColor: 'white',
-                    headerStyle: {
-                        backgroundColor: 'darkblue',
-                    }, 
-                }}/>
+                options={{headerShown: false}}/>
             </Tab.Navigator>
         </NavigationContainer>
     )
