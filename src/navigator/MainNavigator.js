@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator()
 const MainNavigator = () => {
     return(
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="BookList">
+            <Tab.Navigator initialRouteName="Home">
                 <Tab.Screen
                 name="Home"
                 component={HomeScreen}
@@ -60,11 +60,7 @@ const MainNavigator = () => {
                     />
                 ),
                 tabBarLabelPosition: 'below-icon',
-                headerTitleAlign: 'center',
-                headerTintColor: 'white',
-                headerStyle: {
-                    backgroundColor: 'darkblue',
-                }, 
+                headerShown: false,
                 tabBarStyle: {
                     backgroundColor: 'darkblue',
                 }
@@ -73,7 +69,12 @@ const MainNavigator = () => {
                 <Stack.Screen
                 name="BookList"
                 component={BookListScreen}
-                options={{headerShown: false}}/>
+                options={{
+                    headerShown: false, 
+                    tabBarStyle: {
+                        backgroundColor: 'darkblue',
+                    }
+                }}/>
             </Tab.Navigator>
         </NavigationContainer>
     )

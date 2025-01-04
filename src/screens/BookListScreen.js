@@ -15,10 +15,10 @@ const BookListScreen = () => {
       contentContainerStyle={styles.flatListContainer}
       keyExtractor={(item) => item.id}
       renderItem={({item}) => {
-        return(
+        return( //get data from BookList.js
             <View style={styles.bookContainer}>
                 <View style={styles.bookImageContainer}>
-                    {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
+                    {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */} 
                     <Text style={styles.bookImage}>Book Image</Text>
                 </View>
 
