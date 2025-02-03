@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import WishlistScreen from "../screens/WishlistScreen";
 import { Text, Icon } from "react-native-elements";
 import BookListScreen from "../screens/BookListScreen";
+import DetailBookScreen from "../screens/DetailBookScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator()
@@ -69,6 +70,16 @@ const MainNavigator = () => {
                 <Stack.Screen
                 name="BookList"
                 component={BookListScreen}
+                options={{
+                    headerShown: false, 
+                    tabBarStyle: {
+                        backgroundColor: 'darkblue',
+                    }
+                }}/>
+
+                <Stack.Screen
+                name="DetailScreen"
+                component={DetailBookScreen}
                 options={{
                     headerShown: false, 
                     tabBarStyle: {
