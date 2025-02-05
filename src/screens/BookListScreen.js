@@ -1,16 +1,22 @@
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {books} from '../../Data/BookList';
-import {Image} from 'react-native-elements';
 import {bookCategory} from '../../Data/BookCategory';
 
 const BookListScreen = props => {
-  const {navigation} = props;
+  const {route} = props;
+  // const category = route.params.chosenGenre;
+  const {category} = route.params;
+  // const filterBook = books.filter(book => book.genre === category);
+
+  useEffect(() => {
+    console.log('category clicked', category);
+  }, [category]);
 
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Book List</Text> //based on chosen genre
+        <Text style={styles.header}>{category}</Text> //based on chosen genre
       </View>
       <FlatList
         data={books}
@@ -26,9 +32,9 @@ const BookListScreen = props => {
               </View>
 
               <View style={styles.bookInfoContainer}>
-                <Text style={styles.title}>Title: {item.Title}</Text>
-                <Text style={styles.author}>Author: {item.Author}</Text>
-                <Text style={styles.pages}>Page: {item.Page}</Text>
+                <Text style={styles.title}>Title: {item.title}</Text>
+                <Text style={styles.author}>Author: {item.author}</Text>
+                <Text style={styles.pages}>Page: {item.page}</Text>
                 <TouchableOpacity
                   style={styles.seeDetailButton}
                   onPress={() => navigation.navigate('DetailScreen')}>

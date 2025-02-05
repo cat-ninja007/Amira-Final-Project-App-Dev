@@ -854,11 +854,11 @@
       "sha1": "72526b014a3a95fc8208c91816849d3f8d934a7f"
     },
     {
-      "path": "node_modules/react-native-elements/dist/card/CardFeaturedTitle.d.ts",
+      "path": "node_modules/react-native-elements/dist/card/CardFeaturedtitle.d.ts",
       "sha1": "248e06b16a8895125cdd1c371cd02a85bb1670d5"
     },
     {
-      "path": "node_modules/react-native-elements/dist/card/CardFeaturedTitle.js",
+      "path": "node_modules/react-native-elements/dist/card/CardFeaturedtitle.js",
       "sha1": "9fbacf4098d35faa3e2fe5bcdae8c48edd48c49b"
     },
     {
@@ -870,11 +870,11 @@
       "sha1": "96b8c70d0da4855fd8b503d8ddb56eb2d5f232fa"
     },
     {
-      "path": "node_modules/react-native-elements/dist/card/CardTitle.d.ts",
+      "path": "node_modules/react-native-elements/dist/card/Cardtitle.d.ts",
       "sha1": "248e06b16a8895125cdd1c371cd02a85bb1670d5"
     },
     {
-      "path": "node_modules/react-native-elements/dist/card/CardTitle.js",
+      "path": "node_modules/react-native-elements/dist/card/Cardtitle.js",
       "sha1": "bc273a5fbb423009003f87bb7db9ceda1635c559"
     },
     {
@@ -990,11 +990,11 @@
       "sha1": "2f994783cf428e8ef02cbceb86ce00e0fab06f7d"
     },
     {
-      "path": "node_modules/react-native-elements/dist/dialog/DialogTitle.d.ts",
+      "path": "node_modules/react-native-elements/dist/dialog/Dialogtitle.d.ts",
       "sha1": "ca555af78ba592aa0784c6fb7e8a34da48ac52d8"
     },
     {
-      "path": "node_modules/react-native-elements/dist/dialog/DialogTitle.js",
+      "path": "node_modules/react-native-elements/dist/dialog/Dialogtitle.js",
       "sha1": "e0bdaf972c7c2adccd4b7e3667397708cc3284a7"
     },
     {
@@ -1158,11 +1158,11 @@
       "sha1": "afcc885fc57812e0bcfeed9e6ce622af1c9d8582"
     },
     {
-      "path": "node_modules/react-native-elements/dist/list/ListItemTitle.d.ts",
+      "path": "node_modules/react-native-elements/dist/list/ListItemtitle.d.ts",
       "sha1": "d410ca083a05553ed20390989c88a2423730bb92"
     },
     {
-      "path": "node_modules/react-native-elements/dist/list/ListItemTitle.js",
+      "path": "node_modules/react-native-elements/dist/list/ListItemtitle.js",
       "sha1": "fe49c77489542e825e10d5ea6eb74e7f4827ed3f"
     },
     {
