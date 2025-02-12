@@ -1,9 +1,21 @@
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {bookCategory} from '../../Data/BookCategory';
+import {useNavigation} from '@react-navigation/native';
 
-const HomeScreen = props => {
-  const {navigation} = props;
+const categories = [
+  'History',
+  'English Literature',
+  'Indonesian Literature',
+  'Fantasy',
+];
+
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const handleCategoryPressed = category => {
+    navigation.navigate('BookList', {category});
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.subtitleBox}>
@@ -14,7 +26,7 @@ const HomeScreen = props => {
           Each Card Contains Different Genre
         </Text>
       </View>
-      <FlatList
+      {/* <FlatList
         data={bookCategory}
         contentContainerStyle={styles.flatlistContainer}
         keyExtractor={item => item.id}
@@ -36,15 +48,29 @@ const HomeScreen = props => {
         }}
         numColumns={2}
         key={2}
-      />
+      /> */}
 
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate('BookList', setCategory('History'))}>
-        //pass chosen genre
-        <View style={styles.cardContainer}>
-          <Text style={styles.card}>History</Text>
-        </View>
-      </TouchableOpacity> */}
+      {/* <View style={styles.gridContainer}>
+        {categories.map(category => (
+          <TouchableOpacity
+            key={category}
+            onPress={handleCategoryPressed(category)}
+            style={styles.card}>
+            <Text style={styles.text}>{category}</Text>
+          </TouchableOpacity>
+        ))}
+      </View> */}
+
+      <View style={styles.gridContainer}>
+        {categories.map(category => (
+          <TouchableOpacity
+            key={category}
+            style={styles.card}
+            onPress={() => handleCategoryPressed(category)}>
+            <Text style={styles.cardText}>{category}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 };
@@ -86,10 +112,47 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // card: {
+  //   width: 170,
+  //   height: 200,
+  //   backgroundColor: 'blue',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   margin: 5,
+  //   borderColor: 'black',
+  //   borderWidth: 2,
+  // },
+  // gridContainer: {
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'center',
+  //   gap: 10,
+  // },
+  // text: {
+  //   color: 'white',
+  //   fontSize: 30,
+  //   padding: 10,
+  //   textAlign: 'center',
+  // },
   card: {
+    width: 170,
+    height: 200,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: 5,
+  },
+  cardText: {
     color: 'white',
-    fontSize: 30,
-    padding: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
     textAlign: 'center',
+  },
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 10,
   },
 });

@@ -1,13 +1,14 @@
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import {books} from '../../Data/BookList';
-import {bookCategory} from '../../Data/BookCategory';
 
-const BookListScreen = props => {
-  const {route} = props;
+const BookListScreen = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
   // const category = route.params.chosenGenre;
   const {category} = route.params;
-  // const filterBook = books.filter(book => book.genre === category);
+  const filterBook = books.filter(book => book.category === category);
 
   useEffect(() => {
     console.log('category clicked', category);
@@ -16,35 +17,39 @@ const BookListScreen = props => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>{category}</Text> //based on chosen genre
+        <Text style={styles.header}>{category}</Text>
       </View>
-      <FlatList
-        data={books}
-        contentContainerStyle={styles.flatListContainer}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => {
-          return (
-            //get data from BookList.js
-            <View style={styles.bookContainer}>
-              <View style={styles.bookImageContainer}>
-                {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
-                <Text style={styles.bookImage}>Book Image</Text>
-              </View>
+      {filterBook.length > 0 ? (
+        <FlatList
+          data={filterBook}
+          contentContainerStyle={styles.flatListContainer}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => {
+            return (
+              //get data from BookList.js
+              <View style={styles.bookContainer}>
+                <View style={styles.bookImageContainer}>
+                  {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
+                  <Text style={styles.bookImage}>Book Image</Text>
+                </View>
 
-              <View style={styles.bookInfoContainer}>
-                <Text style={styles.title}>Title: {item.title}</Text>
-                <Text style={styles.author}>Author: {item.author}</Text>
-                <Text style={styles.pages}>Page: {item.page}</Text>
-                <TouchableOpacity
-                  style={styles.seeDetailButton}
-                  onPress={() => navigation.navigate('DetailScreen')}>
-                  <Text style={styles.seeDetail}>See Details</Text>
-                </TouchableOpacity>
+                <View style={styles.bookInfoContainer}>
+                  <Text style={styles.title}>Title: {item.title}</Text>
+                  <Text style={styles.author}>Author: {item.author}</Text>
+                  <Text style={styles.pages}>Page: {item.page}</Text>
+                  <TouchableOpacity
+                    style={styles.seeDetailButton}
+                    onPress={() => navigation.navigate('DetailScreen', item)}>
+                    <Text style={styles.seeDetail}>See Details</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          );
-        }}
-      />
+            );
+          }}
+        />
+      ) : (
+        <Text>No books available in this category</Text>
+      )}
     </View>
   );
 };
