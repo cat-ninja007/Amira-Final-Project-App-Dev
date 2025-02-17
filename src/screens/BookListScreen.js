@@ -39,7 +39,7 @@ const BookListScreen = () => {
                   <Text style={styles.pages}>Page: {item.page}</Text>
                   <TouchableOpacity
                     style={styles.seeDetailButton}
-                    onPress={() => navigation.navigate('DetailScreen', item)}>
+                    onPress={() => navigation.navigate('BookDetail', item)}>
                     <Text style={styles.seeDetail}>See Details</Text>
                   </TouchableOpacity>
                 </View>

@@ -41,7 +41,7 @@ const WishlistScreen = () => {
                 <View style={styles.bookInfoContainer}>
                   <Text style={styles.title}>Title: {item.title}</Text>
                   <Text style={styles.author}>Author: {item.author}</Text>
-                  <Text style={styles.pages}>Page: {item.pages}</Text>
+                  <Text style={styles.pages}>Page: {item.page}</Text>
                   <TouchableOpacity style={styles.seeDetailButton}>
                     <Text style={styles.seeDetail}>See Details</Text>
                   </TouchableOpacity>

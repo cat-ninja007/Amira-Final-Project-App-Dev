@@ -20,25 +20,32 @@ const DetailBookScreen = () => {
     });
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'skyblue'}}>
       <View style={styles.imgContainer}>
         <View style={styles.bookImg}>
           <Text>Book Image</Text>
         </View>
+        {/* <View style={styles.infoContainer}> */}
+        <View style={styles.bookInfo}>
+          <Text>Title: {title}</Text>
+          <Text>Author: {author}</Text>
+          <Text>Page: {page}</Text>
+          <Text>Category: {category}</Text>
+          <Text>Rating: {rating}</Text>
+        </View>
+        {/* </View> */}
+        {/* <View style={styles.buttonContainer}> */}
+        <View style={styles.bookmarkContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              handleBookMark();
+            }}
+            style={styles.bookmark}>
+            <Text>Add to Bookmark</Text>
+          </TouchableOpacity>
+        </View>
+        {/* </View> */}
       </View>
-      <View style={styles.bookInfo}>
-        <Text>Title: {title}</Text>
-        <Text>Author: {author}</Text>
-        <Text>Page: {page}</Text>
-        <Text>Category: {category}</Text>
-        <Text>Rating: {rating}</Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          handleBookMark();
-        }}>
-        <Text>Add to Bookmark</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -60,11 +67,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bookInfo: {
-    borderWidth: 1,
-    backgroundColor: 'skyblue',
+    borderWidth: 2,
+    borderStyle: 'dashed',
+    backgroundColor: 'lightblue',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 20,
+    width: '80%',
+  },
+  bookmark: {
+    textAlign: 'center',
+  },
+  bookmarkContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    padding: 8,
+    backgroundColor: 'lightblue',
+    width: '50%',
+    marginTop: 30,
+    borderWidth: 2,
+    borderRadius: 10,
   },
 });
