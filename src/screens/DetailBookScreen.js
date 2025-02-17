@@ -21,8 +21,10 @@ const DetailBookScreen = () => {
   };
   return (
     <View style={{flex: 1}}>
-      <View style={styles.bookImg}>
-        <Text>Book Image</Text>
+      <View style={styles.imgContainer}>
+        <View style={styles.bookImg}>
+          <Text>Book Image</Text>
+        </View>
       </View>
       <View style={styles.bookInfo}>
         <Text>Title: {title}</Text>
@@ -52,6 +54,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 10,
+  },
+  imgContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bookInfo: {
     borderWidth: 1,

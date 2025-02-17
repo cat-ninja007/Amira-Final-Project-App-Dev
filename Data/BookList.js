@@ -29,7 +29,7 @@ export const books = [
     author: 'Barbara W Tuchman',
     category: 'History',
     page: '524',
-    rating: '1',
+    rating: '3',
   },
   {
     title: 'Paris 1919',
