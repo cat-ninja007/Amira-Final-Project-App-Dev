@@ -130,8 +130,7 @@ const HomeStack = () => (
       component={DetailBookScreen}
       options={{
         title: 'Book Details',
-        headerStyle: {backgroundColor: 'darkblue'},
-        headerTintColor: 'white',
+        headerShown: false,
       }}
     />
   </Stack.Navigator>
@@ -196,14 +195,14 @@ const styles = StyleSheet.create({
   },
   tabButton: {
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 30,
+    // paddingVertical: 10,
+    // paddingHorizontal: 30,
     backgroundColor: 'transparent',
   },
   activeTab: {
     backgroundColor: 'blue',
     borderRadius: 5,
-    paddingVertical: 10,
+    // paddingVertical: 10,
   },
   tabText: {
     color: 'white',

@@ -19,7 +19,10 @@ const HomeScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.subtitleBox}>
-        <Text style={styles.subtitle}>Pick A Card!</Text>
+        {/* <Text style={styles.subtitle}>Pick A Card!</Text> */}
+        <Text style={{fontFamily: 'PlayfairDisplay-Bold', fontSize: 30}}>
+          Pick A Card!
+        </Text>
       </View>
       <View style={styles.descriptionBox}>
         <Text style={styles.description}>
@@ -67,7 +70,16 @@ const HomeScreen = () => {
             key={category}
             style={styles.card}
             onPress={() => handleCategoryPressed(category)}>
-            <Text style={styles.cardText}>{category}</Text>
+            <Text
+              style={[
+                styles.cardText && {
+                  fontFamily: 'SourGummy-SemiBold',
+                  color: 'white',
+                  fontSize: 17,
+                },
+              ]}>
+              {category}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -90,6 +102,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 30,
+    fontFamily: 'PlayfairDisplay-Bold',
   },
   descriptionBox: {
     padding: 5,
@@ -99,6 +112,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 20,
+    fontFamily: 'PlayfairDisplay-Medium',
   },
   flatlistContainer: {
     justifyContent: 'space-around',
@@ -144,9 +158,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   cardText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
     textAlign: 'center',
   },
   gridContainer: {
