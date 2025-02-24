@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 5,
+    fontFamily: 'SourGummy-SemiBold',
   },
 });
 

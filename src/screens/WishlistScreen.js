@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   header: {
     color: 'white',
     fontSize: 20,
+    fontFamily: 'PlayfairDisplay-Bold',
   },
   flatListContainer: {
     padding: 8,
@@ -97,16 +98,20 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
+    fontFamily: 'SourGummy-Regular',
   },
   author: {
     color: 'white',
+    fontFamily: 'SourGummy-Regular',
   },
   pages: {
     color: 'white',
+    fontFamily: 'SourGummy-Regular',
   },
   seeDetail: {
     color: 'white',
     textDecorationLine: 'underline',
     textAlign: 'right',
+    fontFamily: 'SourGummy-SemiBold',
   },
 });

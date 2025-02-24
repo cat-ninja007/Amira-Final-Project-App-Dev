@@ -1,4 +1,11 @@
-import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {books} from '../../Data/BookList';
@@ -29,8 +36,13 @@ const BookListScreen = () => {
               //get data from BookList.js
               <View style={styles.bookContainer}>
                 <View style={styles.bookImageContainer}>
-                  {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
-                  <Text style={styles.bookImage}>{item.bookImage}</Text>
+                  <Image
+                    style={styles.bookImage}
+                    source={{
+                      uri: item.bookImage,
+                    }}
+                  />
+                  {/* <Text style={styles.bookImage}>{item.bookImage}</Text> */}
                 </View>
 
                 <View style={styles.bookInfoContainer}>
@@ -83,8 +95,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   bookImageContainer: {
-    borderColor: 'red',
+    width: 100,
+    height: 150,
+  },
+  bookImage: {
     borderWidth: 2,
+    borderColor: 'darkblue',
+    borderRadius: 10,
+    marginBottom: 10,
+    width: '100%',
+    height: '100%',
   },
   bookInfoContainer: {
     // borderColor: 'black',
