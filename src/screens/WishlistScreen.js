@@ -1,14 +1,50 @@
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import realm from '../database/realm';
+import {useRoute, useNavigation} from '@react-navigation/native';
+import {CheckBox} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 
 const WishlistScreen = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
   const [bookmark, setBookmark] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
 
   const loadingBookMark = () => {
     const bookSaved = realm.objects('Book');
     setBookmark(Array.from(bookSaved));
   };
+
+  const setCheckBox = (id, status) => {
+    const checkedBook = bookmark.map(item => {
+      if (item.id === id) {
+        item.checkedStatus = !status;
+      }
+      return item;
+    });
+    setBookmark(checkedBook);
+  };
+
+  useEffect(() => {
+    const wishlistPage = navigation.addListener('focus', () => {
+      const bookSaved = realm.objects('Book');
+      const checkedBook = bookSaved.map(item => {
+        item.checkedStatus = false;
+        return item;
+      });
+      console.log(checkedBook);
+      setBookmark(checkedBook);
+    });
+    return wishlistPage;
+  }, []);
 
   useEffect(() => {
     loadingBookMark();
@@ -19,11 +55,32 @@ const WishlistScreen = () => {
     return () => realm.removeListener('change', updateBookMark);
   }, []);
 
+  useEffect(() => {
+    // const saveBook = realm.objects('Book');
+    // saveBook.map(book => {
+    //   console.log(book.bookImage);
+    // });
+    // console.log(saveBook);
+    console.log(bookmark);
+  }, []);
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Your Bookmark</Text>
       </View>
+
+      {bookmark.length !== 0 ? (
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => setIsEdit(!isEdit)}>
+          {isEdit ? (
+            <Text style={{color: 'white'}}>Cancel</Text>
+          ) : (
+            <Text style={{color: 'white'}}>Edit</Text>
+          )}
+        </TouchableOpacity>
+      ) : null}
+
       {bookmark.length > 0 ? (
         <FlatList
           data={bookmark}
@@ -35,7 +92,13 @@ const WishlistScreen = () => {
               <View style={styles.bookContainer}>
                 <View style={styles.bookImageContainer}>
                   {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
-                  <Text style={styles.bookImage}>Book Image</Text>
+                  {/* <Text style={styles.bookImage}>Book Image</Text> */}
+                  <Image
+                    style={styles.bookImage}
+                    source={{
+                      uri: item.bookImage,
+                    }}
+                  />
                 </View>
 
                 <View style={styles.bookInfoContainer}>
@@ -45,6 +108,14 @@ const WishlistScreen = () => {
                   <TouchableOpacity style={styles.seeDetailButton}>
                     <Text style={styles.seeDetail}>See Details</Text>
                   </TouchableOpacity>
+                  {isEdit ? (
+                    <CheckBox
+                      size={20}
+                      containerStyle={styles.checkbox}
+                      onPress={() => setCheckBox(item.id, item.checkedStatus)}
+                      checked={item.checkedStatus}
+                    />
+                  ) : null}
                 </View>
               </View>
             );
@@ -53,6 +124,14 @@ const WishlistScreen = () => {
       ) : (
         <Text>No bookmarks</Text>
       )}
+
+      {isEdit ? (
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => removeBook()}>
+          <Icon name="delete" type="antdesign" size={20} color="white" />
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -86,8 +165,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   bookImageContainer: {
-    borderColor: 'red',
-    borderWidth: 2,
+    width: 100,
+    height: 150,
   },
   bookInfoContainer: {
     // borderColor: 'black',
@@ -113,5 +192,24 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     fontFamily: 'SourGummy-SemiBold',
+  },
+  bookImage: {
+    borderWidth: 2,
+    borderColor: 'darkblue',
+    borderRadius: 5,
+    marginBottom: 10,
+    width: 100,
+    height: 150,
+  },
+  checkbox: {
+    paddingRight: 0,
+    paddingLeft: 0,
+    left: 200,
+    marginLeft: 5,
+  },
+  editButton: {
+    position: 'absolute',
+    padding: 20,
+    right: 8,
   },
 });

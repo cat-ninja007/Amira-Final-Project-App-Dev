@@ -11,6 +11,7 @@ class BookSchema extends Realm.Object {
       category: 'string',
       page: 'string',
       rating: 'string',
+      bookImage: 'string',
     },
   };
 }
