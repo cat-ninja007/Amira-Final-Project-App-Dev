@@ -33,6 +33,26 @@ const WishlistScreen = () => {
     setBookmark(checkedBook);
   };
 
+  const removeBook = () => {
+    const checkTrue = [];
+
+    bookmark.forEach(item => {
+      if (item.checkedStatus) {
+        checkTrue.push(item.id);
+      }
+    });
+    if (checkTrue.length !== 0) {
+      realm.write(() => {
+        for (i = 0; i < checkTrue.length; i++) {
+          const bookmark = realm
+            .objects('Book')
+            .filtered(`id = ${checkTrue[i]}`);
+          realm.delete(bookmark);
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     const wishlistPage = navigation.addListener('focus', () => {
       const bookSaved = realm.objects('Book');
@@ -105,6 +125,7 @@ const WishlistScreen = () => {
                   <Text style={styles.title}>Title: {item.title}</Text>
                   <Text style={styles.author}>Author: {item.author}</Text>
                   <Text style={styles.pages}>Page: {item.page}</Text>
+                  <Text style={styles.rating}>Rating: {item.rating}</Text>
                   <TouchableOpacity style={styles.seeDetailButton}>
                     <Text style={styles.seeDetail}>See Details</Text>
                   </TouchableOpacity>
@@ -130,6 +151,9 @@ const WishlistScreen = () => {
           style={styles.deleteButton}
           onPress={() => removeBook()}>
           <Icon name="delete" type="antdesign" size={20} color="white" />
+          <View style={styles.containerDelete}>
+            <Text style={styles.deleteText}> Delete </Text>
+          </View>
         </TouchableOpacity>
       ) : null}
     </View>
@@ -187,10 +211,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'SourGummy-Regular',
   },
+  rating: {
+    color: 'white',
+    fontFamily: 'SourGummy-Regular',
+  },
   seeDetail: {
     color: 'white',
     textDecorationLine: 'underline',
     textAlign: 'right',
+    position: 'relative',
     fontFamily: 'SourGummy-SemiBold',
   },
   bookImage: {
@@ -204,12 +233,24 @@ const styles = StyleSheet.create({
   checkbox: {
     paddingRight: 0,
     paddingLeft: 0,
-    left: 200,
     marginLeft: 5,
   },
   editButton: {
     position: 'absolute',
     padding: 20,
     right: 8,
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerDelete: {
+    marginLeft: 8,
+  },
+  deleteText: {
+    color: 'white',
   },
 });

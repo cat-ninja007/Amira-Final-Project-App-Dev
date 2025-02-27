@@ -49,6 +49,7 @@ const BookListScreen = () => {
                   <Text style={styles.title}>Title: {item.title}</Text>
                   <Text style={styles.author}>Author: {item.author}</Text>
                   <Text style={styles.pages}>Page: {item.page}</Text>
+                  <Text style={styles.rating}>Rating: {item.rating}</Text>
                   <TouchableOpacity
                     style={styles.seeDetailButton}
                     onPress={() => navigation.navigate('BookDetail', item)}>
@@ -122,6 +123,10 @@ const styles = StyleSheet.create({
     fontFamily: 'SourGummy-Regular',
   },
   pages: {
+    color: 'white',
+    fontFamily: 'SourGummy-Regular',
+  },
+  rating: {
     color: 'white',
     fontFamily: 'SourGummy-Regular',
   },

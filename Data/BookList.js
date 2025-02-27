@@ -61,7 +61,10 @@ export const books = [
     author: 'Eka kurniawan',
     category: 'Indonesian Literature',
     page: '150',
-    rating: '2',
+    rating: '4',
+    description:
+      'Kematian perempuan itu sama sekali tak menghentikan cintanya, sebaliknya cinta itu semakin menjadi-jadi. Setelah menjadi bangkai, tiba-tiba perempuan itu menjadi setengah dewa, dan ia semakin memujanya. Ia menghabiskan tiga malam penuh insomnia, dimana setelah bertahun-tahun ia menangis begitu menyedihkan dan berdoa dengan serampangan agar Tuhan mengembalikan perempuan itu ke dunia, dengan cara apa pun. Ia tahu itu tak mungkin, kecuali akan menjadi teror bagi orang yang hidup, tapi ia bersikeras, perempuan itu bisa hidup kembali didorong olehnya cintanya yang meluap-lupa. Ia memimpikannya dalam tidur-tidur yang sejenak, dan membayangkannya di waktu-waktu terjaga yang menyiksa. Kadang-kadang ia berharap perempuan itu muncul di sudut kamarnya, tak peduli yang muncul adalah hantu.',
+    bookImage: 'https://i.ibb.co.com/YFnVv6VW/Cinta-Tak-Ada-Mati.jpg',
   },
   {
     title: 'Tanah surga merah',
@@ -69,7 +72,10 @@ export const books = [
     author: 'Arafat nur',
     category: 'Indonesian Literature',
     page: '305',
-    rating: '3',
+    rating: '3.7',
+    description:
+      'Konflik politik di Nangroe Aceh Darussalam (NAD) bukan sekadar latar novel ini, tetapi juga inti cerita. Meski menjadikan gejolak politik lokal sebagai pokok cerita, naskah ini tidak terperangkap pada reportase jurnalistik. Ia menghadirkan seorang mantan tentara Gerakan Aceh Merdeka (GAM) yang pulang ke kampungnya dan menemukan kenyataan-kenyataan yang tidak sepenuhnya bisa ia terima. Ada harapan yang tidak terpenuhi tetapi juga ada keajaiban yang datang tanpa diminta. Disampaikan dengan gaya reportase yang tidak kering, novel ini dengan sabar membangun peristiwa demi peristiwa tentang tema-tema lokal yang sangat politis. Pengalaman romantis yang membayang samar di akhir naskah ini adalah sejumput harapan di tengah segala yang begitu mengekang. Benturan antara banyak kepentingan dan karakter, dengan amunisi konflik politik lokal, bukan hanya membuat naskah ini sebagai naskah novel politis tetapi juga memberi humor yang baik',
+    bookImage: 'https://i.ibb.co.com/zW6VqTKd/images-7.jpg',
   },
   {
     title: 'Harimau Harimau!',
@@ -78,6 +84,9 @@ export const books = [
     category: 'Indonesian Literature',
     page: '212',
     rating: '4',
+    description:
+      'Buku ini dapat dibaca sebagai sebuah cerita petualangan di rimba raya oleh sekelompok pengumpul damar yang diburu oleh seekor harimau yang kelaparan. Berhari-hari mereka mencoba menyelamatkan diri mereka dan seorang demi seorang di antara mereka jatuh menjadi korban terkaman harimau. Di tingkat lain, juga terjadi petualangan dalam diri masing-masing anggota kelompok pengumpul damar ini. Di bawah tekanan ancaman harimau yang terus-menerus memburu mereka, dalam diri meraka masing-masing, yang mempertinggi pula kesadaran mereka tentang kekuatan dan kelemahan-kelemahan para anggota kelompok mereka yang lain. Di antara mereka malahan sampai pada kesadaran bahwa sebelum membunuh harimau yang memburu-buru mereka, tak kalah pentingnya ialah untuk membunuh terlebih dahulu harimau yang berada dalam setiap anak manusia.',
+    bookImage: 'https://i.ibb.co.com/G3Gbs7qP/images-8.jpg',
   },
   {
     title: 'Misteri Patung Garam',
@@ -85,7 +94,10 @@ export const books = [
     author: 'Ruwi Meita',
     category: 'Indonesian Literature',
     page: '276',
-    rating: '5',
+    rating: '4.6',
+    description:
+      'Seorang pianis ditemukan mati,terduduk di depan pianonya, dengan bibir terjahit. Bola matanya dirusak, meninggalkan lubang hitam yang amat mengerikan. Rambut palsu merah panjang menutupi kepalanya.Sementara, otak dan organ-organ tubuhnya telah dikeluarkan secara paksa. Kulitnya memucat seputih garam. Bukan, bukan seputih garam. Tapi, seluruh tubuh sang pianis itu benar-benar dilumuri adonan garam. Kiri Lamari, penyidik kasus ini, terus-menerus dihantui lubang hitam mata sang pianis. Mata yang seakan meminta pertolongan sambil terus bertanya, kenapa aku mati? Mata yang mengingatkan Kiri Lamari akan mata ibunya.Yang juga ia temukan tak bernyawa puluhan tahun lalu. Garam? Kenapa garam? Kiri Lamari belum menemukan jawabannya. Sementara mayat tanpa organ yang dilumuri garam telah ditemukan kembali…. Dia sangat sadis. Dan, dia masih berkeliaran.',
+    bookImage: 'https://i.ibb.co.com/dw4qrCsR/25082874.jpg',
   },
   {
     title: 'Kukila',
@@ -93,7 +105,10 @@ export const books = [
     author: 'M. Aan Mansyur',
     category: 'Indonesian Literature',
     page: '184',
-    rating: '1',
+    rating: '3.8',
+    description:
+      'Nak, dua hal aku benci dalam hidup: September dan pohon mangga. September tidak pernah mau beranjak dari rumah. Betah. Ia sibuk meletakkan neraka di seluruh penjuru. Di ruang tamu. Di ranjang. Di meja makan. Bahkan di dada.Batang pohon mangga tetap selutut persis prasasti batu. Ia berdiri mengekalkan dosa-dosa—dan dosa adalah pemimpin yang baik bagi penyesalan-penyesalan.Kukila adalah perempuan itu, yang membenci September dan pohon mangga. Hidupnya didera rasa bersalah yang besar, kepada mantan suaminya, mantan kekasihnya, dan anak-anaknya. Kepada suratlah dia berbicara dan kepada pohon-pohonlah dia menyembunyikan masa lalu, karena rahasia, konon, akan hidup aman dalam batang-batang pohon.',
+    bookImage: 'https://i.ibb.co.com/bjbJpS9c/16029849.jpg',
   },
   {
     title: 'Warriors: the last hope',
