@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import realm from '../database/realm';
 import {ScrollView} from 'react-native';
@@ -10,26 +10,43 @@ const DetailBookScreen = () => {
   const {title, id, author, rating, page, category, description, bookImage} =
     route.params;
 
+  // ✅ State to track if book is bookmarked
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // ✅ Toggle Bookmark Status
   const handleBookMark = () => {
     realm.write(() => {
       const currentBook = realm.objectForPrimaryKey('Book', id);
-      if (!currentBook) {
+
+      if (currentBook) {
+        currentBook.isBookmarked = !currentBook.isBookmarked; // ✅ Toggle status
+        setIsBookmarked(currentBook.isBookmarked); // ✅ Update UI
+      } else {
         realm.create('Book', {
-          title,
           id,
+          title,
           author,
           rating,
           page,
           category,
           description,
           bookImage,
+          isBookmarked: true,
         });
-        alert('Success!');
-      } else {
-        alert('This book is already in ur bookmark');
+        setIsBookmarked(true); // ✅ Update UI
       }
     });
+
+    alert(isBookmarked ? 'Removed from bookmark' : 'Bookmarked!');
   };
+
+  // ✅ Check if the book is already bookmarked
+  useEffect(() => {
+    const currentBook = realm.objectForPrimaryKey('Book', id);
+    if (currentBook) {
+      setIsBookmarked(currentBook.isBookmarked);
+    }
+  }, []);
 
   useEffect(() => {
     console.log('book image url:', bookImage);
@@ -76,12 +93,10 @@ const DetailBookScreen = () => {
           {/* </View> */}
           {/* <View style={styles.buttonContainer}> */}
           <View style={styles.bookmarkContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                handleBookMark();
-              }}
-              style={styles.bookmark}>
-              <Text>Add to Bookmark</Text>
+            <TouchableOpacity onPress={handleBookMark} style={styles.bookmark}>
+              <Text>
+                {isBookmarked ? 'Remove from Bookmark' : 'Add to Bookmark'}
+              </Text>
             </TouchableOpacity>
           </View>
           {/* </View> */}

@@ -18,144 +18,148 @@ const WishlistScreen = () => {
   const [bookmark, setBookmark] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
 
+  // ✅ Load only books that are actually bookmarked
   const loadingBookMark = () => {
-    const bookSaved = realm.objects('Book');
-    setBookmark(Array.from(bookSaved));
+    const bookSaved = realm.objects('Book').filtered('isBookmarked == true');
+    setBookmark(Array.from(bookSaved)); // ✅ Update state
   };
 
-  const setCheckBox = (id, status) => {
-    const checkedBook = bookmark.map(item => {
-      if (item.id === id) {
-        item.checkedStatus = !status;
-      }
-      return item;
-    });
-    setBookmark(checkedBook);
+  // ✅ Toggle checkbox state
+  const setCheckBox = id => {
+    const updatedBooks = bookmark.map(item =>
+      item.id === id ? {...item, checkedStatus: !item.checkedStatus} : item,
+    );
+
+    setBookmark(updatedBooks); // ✅ Update only the checkbox state, not isBookmarked
   };
 
+  // ✅ Remove checked books
   const removeBook = () => {
-    const checkTrue = [];
+    let removed = false;
 
-    bookmark.forEach(item => {
-      if (item.checkedStatus) {
-        checkTrue.push(item.id);
-      }
-    });
-    if (checkTrue.length !== 0) {
-      realm.write(() => {
-        for (i = 0; i < checkTrue.length; i++) {
-          const bookmark = realm
-            .objects('Book')
-            .filtered(`id = ${checkTrue[i]}`);
-          realm.delete(bookmark);
+    realm.write(() => {
+      bookmark.forEach(item => {
+        if (item.checkedStatus) {
+          // ✅ Only remove books that are checked
+          const book = realm.objectForPrimaryKey('Book', item.id);
+          if (book) {
+            book.isBookmarked = false; // ✅ Unmark as bookmarked
+            removed = true;
+          }
         }
       });
+    });
+
+    if (removed) {
+      alert('Successfully removed the selected book(s) from your wishlist!');
     }
+
+    loadingBookMark(); // ✅ Refresh UI after removing books
+    setIsEdit(false); // ✅ Hide delete button after removal
   };
 
+  // ✅ Refresh when screen is focused
   useEffect(() => {
-    const wishlistPage = navigation.addListener('focus', () => {
-      const bookSaved = realm.objects('Book');
-      const checkedBook = bookSaved.map(item => {
-        item.checkedStatus = false;
-        return item;
-      });
-      console.log(checkedBook);
-      setBookmark(checkedBook);
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadingBookMark();
     });
-    return wishlistPage;
-  }, []);
 
+    return unsubscribe;
+  }, [navigation]);
+
+  // ✅ Listen for Realm database changes
   useEffect(() => {
-    loadingBookMark();
     const updateBookMark = () => {
       loadingBookMark();
     };
+
     realm.addListener('change', updateBookMark);
     return () => realm.removeListener('change', updateBookMark);
   }, []);
 
-  useEffect(() => {
-    // const saveBook = realm.objects('Book');
-    // saveBook.map(book => {
-    //   console.log(book.bookImage);
-    // });
-    // console.log(saveBook);
-    console.log(bookmark);
-  }, []);
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Your Bookmark</Text>
       </View>
 
-      {bookmark.length !== 0 ? (
+      {bookmark.length !== 0 && (
         <TouchableOpacity
           style={styles.editButton}
-          onPress={() => setIsEdit(!isEdit)}>
-          {isEdit ? (
-            <Text style={{color: 'white'}}>Cancel</Text>
-          ) : (
-            <Text style={{color: 'white'}}>Edit</Text>
-          )}
+          onPress={() => {
+            setIsEdit(!isEdit);
+
+            if (!isEdit) {
+              // ✅ Reset all checkboxes to unchecked when entering edit mode
+              setBookmark(prevBookmarks =>
+                prevBookmarks.map(book => ({...book, checkedStatus: false})),
+              );
+            }
+          }}>
+          <Text style={{color: 'white'}}>{isEdit ? 'Cancel' : 'Edit'}</Text>
         </TouchableOpacity>
-      ) : null}
+      )}
 
       {bookmark.length > 0 ? (
         <FlatList
           data={bookmark}
           contentContainerStyle={styles.flatListContainer}
           keyExtractor={item => item.id}
-          renderItem={({item}) => {
-            return (
-              //get data based on user's bookmark
-              <View style={styles.bookContainer}>
-                <View style={styles.bookImageContainer}>
-                  {/* <Image style={styles.bookImage} source={{uri: item.imageLink}}/> */}
-                  {/* <Text style={styles.bookImage}>Book Image</Text> */}
-                  <Image
-                    style={styles.bookImage}
-                    source={{
-                      uri: item.bookImage,
-                    }}
-                  />
-                </View>
-
-                <View style={styles.bookInfoContainer}>
-                  <Text style={styles.title}>Title: {item.title}</Text>
-                  <Text style={styles.author}>Author: {item.author}</Text>
-                  <Text style={styles.pages}>Page: {item.page}</Text>
-                  <Text style={styles.rating}>Rating: {item.rating}</Text>
-                  <TouchableOpacity style={styles.seeDetailButton}>
-                    <Text style={styles.seeDetail}>See Details</Text>
-                  </TouchableOpacity>
-                  {isEdit ? (
-                    <CheckBox
-                      size={20}
-                      containerStyle={styles.checkbox}
-                      onPress={() => setCheckBox(item.id, item.checkedStatus)}
-                      checked={item.checkedStatus}
-                    />
-                  ) : null}
-                </View>
+          renderItem={({item}) => (
+            <View style={styles.bookContainer}>
+              <View style={styles.bookImageContainer}>
+                <Image
+                  style={styles.bookImage}
+                  source={{uri: item.bookImage}}
+                />
               </View>
-            );
-          }}
+
+              <View style={styles.bookInfoContainer}>
+                <Text style={styles.title}>Title: {item.title}</Text>
+                <Text style={styles.author}>Author: {item.author}</Text>
+                <Text style={styles.pages}>Page: {item.page}</Text>
+                <Text style={styles.rating}>Rating: {item.rating}</Text>
+                <TouchableOpacity
+                  style={styles.seeDetailButton}
+                  onPress={() => {
+                    navigation.navigate('BookDetail', {
+                      id: item.id,
+                      title: item.title,
+                      author: item.author,
+                      rating: item.rating,
+                      page: item.page,
+                      category: item.category,
+                      description: item.description,
+                      bookImage: item.bookImage,
+                    });
+                  }}>
+                  <Text style={styles.seeDetail}>See Details</Text>
+                </TouchableOpacity>
+
+                {isEdit && (
+                  <CheckBox
+                    size={20}
+                    containerStyle={styles.checkbox}
+                    onPress={() => setCheckBox(item.id)}
+                    checked={item.checkedStatus || false} // ✅ Ensure it reads from checkedStatus
+                  />
+                )}
+              </View>
+            </View>
+          )}
         />
       ) : (
         <Text>No bookmarks</Text>
       )}
 
-      {isEdit ? (
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => removeBook()}>
+      {isEdit && (
+        <TouchableOpacity style={styles.deleteButton} onPress={removeBook}>
           <Icon name="delete" type="antdesign" size={20} color="white" />
           <View style={styles.containerDelete}>
             <Text style={styles.deleteText}> Delete </Text>
           </View>
         </TouchableOpacity>
-      ) : null}
+      )}
     </View>
   );
 };
